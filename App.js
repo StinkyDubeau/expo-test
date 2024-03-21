@@ -3,10 +3,13 @@ import { Text, View } from "react-native";
 import { Button } from "react-native";
 import { useState } from "react";
 import { say } from "cowsay";
+import { ToWords } from "to-words";
 
 export default function App() {
   const [counter, setCounter] = useState(0);
-  const [text, setText] = useState(say({text: "wzup"}))
+  const [text, setText] = useState(say({text: "wzup"}));
+  const toWords = new ToWords();
+
 
   return (
     <View className="flex-1 justify-center items-center bg-white">
@@ -22,16 +25,16 @@ export default function App() {
             <View className="bg-yellow-400 rounded-lg my-2">
               <Button onPress={() => {
                 setCounter(counter+1)
-                setText(say({text: `${counter}`}))  
+                setText(say({text: `${toWords.convert(counter)}`}))  
               } 
             } title="Plus"/>
-            </View>
+          </View>
 
-            {/* Minus Button */}
-            <View className="bg-yellow-400 rounded-lg">
-              <Button onPress={() => {
-                setCounter(counter-1)
-                setText(say({text: `${counter}`}))  
+          {/* Minus Button */}
+          <View className="bg-yellow-400 rounded-lg">
+            <Button onPress={() => {
+              setCounter(counter-1)
+              setText(say({text: `${toWords.convert(counter)}`}))  
               } 
             } title="Minus"/>
             </View>
